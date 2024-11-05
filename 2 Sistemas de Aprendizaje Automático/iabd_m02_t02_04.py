@@ -28,3 +28,5 @@ isolation_forest.fit(X)
 predictions = isolation_forest.predict(X)
 
 predictions
+
+"""El resultado, ([ 1, 1, 1, 1, -1]), efectivamente idenfica el punto (10,10) como outlier"""
