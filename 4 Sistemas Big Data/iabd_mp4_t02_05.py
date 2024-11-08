@@ -17,8 +17,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Cargar el archivo CSV (ajusta el nombre del archivo si es necesario)
+# Cargar el archivo CSV
 file_path = 'ventas_con_problemas_v2.csv'  # El archivo debe subirse en Colab
+# Para el archivo v3, usar la línea
+# file_path = 'ventas_con_problemas_v3.csv'
+
 data = pd.read_csv(file_path)
 
 # Guardar el número de filas originales para el informe final
@@ -412,3 +415,6 @@ plt.show()
 
 # Guardar los datos limpios en un nuevo archivo CSV
 data.to_csv('ventas_limpias_v2.csv', index=False)
+
+# Para el archivo v3, usar la línea
+# data.to_csv('ventas_limpias_v3.csv', index=False)
