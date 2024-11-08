@@ -219,7 +219,7 @@ print(data[['cantidad', 'precio_unitario', 'total']].describe())
 
 """5.	Crea visualizaciones que ayuden a entender la distribución de los datos y los efectos de la limpieza.
 
-Histogramas para visualizar la distribución de lso datos antes y después de la limpieza. Permite observar si la limpieza ha afectado la forma de la distribución, si se han eliminado valores atípicos, etc.
+Histogramas para visualizar la distribución de los datos antes y después de la limpieza. Permite observar si la limpieza ha afectado la forma de la distribución, si se han eliminado valores atípicos, etc.
 """
 
 # Antes de la limpieza
@@ -395,6 +395,8 @@ plt.xlabel("Día de la Semana")
 plt.ylabel("Ventas Totales")
 plt.show()
 
+"""Un gráfico de barras para saber qué producto es el que más ingresos deja."""
+
 # Gráfico de barras: Distribución de ingresos por producto
 ventas_por_producto = data.groupby('producto')['total'].sum().sort_values()
 plt.figure(figsize=(10, 6))
@@ -403,3 +405,10 @@ plt.title("Distribución de ingresos totales por producto")
 plt.xlabel("Ventas Totales")
 plt.ylabel("Producto")
 plt.show()
+
+"""Guarda los datos limpios en un nuevo archivo CSV.
+
+"""
+
+# Guardar los datos limpios en un nuevo archivo CSV
+data.to_csv('ventas_limpias_v2.csv', index=False)
