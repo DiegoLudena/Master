@@ -10,6 +10,8 @@ EJERCICIO 1: Pandas vs Polars:
 o	Carga un conjunto de datos grande (un CSV o un archivo de texto) en Python.
 o	Realiza algunas operaciones básicas como filtrado, ordenación y agregación de datos utilizando tanto Pandas como Polars.
 o	Compara el tiempo de ejecución de las operaciones en ambos casos.
+
+Comenzamos importando las bibliotecas Pandas y Polars, y time para poder anotar el tiempo que tardan en hacer los procesos, así como cargar el dataset.
 """
 
 import pandas as pd
@@ -39,6 +41,8 @@ tiempo_carga_polars = time.time() - inicio
 print(f"Tiempo de carga con Pandas: {tiempo_carga_pandas} segundos")
 print(f"Tiempo de carga con Polars: {tiempo_carga_polars} segundos")
 
+"""Confirmamos que el dataset se ha cargado bien. Además, así podemos ver cómo se diferencian Pandas y Polars a la hora de hacer un head y de mostrar los tipos de datos de las columnas."""
+
 # Mostrar las primeras filas del DataFrame, incluyendo los tipos de datos con pandas
 print(df_pandas.head())
 
@@ -50,6 +54,8 @@ print(df_polars.head())
 
 # Obtener información más detallada sobre los tipos de datos de cada columna con polars
 print(df_polars.schema)
+
+"""Hacemos las operaciones que pide el ejercicio, así como alguna más que nos ha parecido interesante. Para todas ellas guardamos el tiempo que emplean ambas bibliotecas."""
 
 # Filtrado de los animes con mejor nota
 inicio = time.time()
@@ -124,6 +130,8 @@ print(f"Tiempo de nueva columna Polars: {tiempo_columna_polars} segundos")
 print(f"Tiempo de cambio de tipo con Pandas: {tiempo_cambio_tipo_pandas} segundos")
 print(f"Tiempo de cambio de tipo con Polars: {tiempo_cambio_tipo_polars} segundos")
 
+"""Por último mostramos y comparamos los tiempos."""
+
 # Datos de tiempos de ejecución
 tiempos_pandas = [tiempo_carga_pandas, tiempo_filtro_pandas, tiempo_orden_pandas, tiempo_agregado_pandas, tiempo_columna_pandas, tiempo_cambio_tipo_pandas]
 tiempos_polars = [tiempo_carga_polars, tiempo_filtro_polars, tiempo_orden_polars, tiempo_agregado_polars, tiempo_columna_polars, tiempo_cambio_tipo_polars]
@@ -172,3 +180,9 @@ plt.tight_layout()
 
 # Mostrar el gráfico
 plt.show()
+
+"""Podemos ver que en casi todas las operaciones Polars es sensiblemente más rápido que Pandas, excepto en la operación de cambio de tipo y en la agregación.
+En la carga Pandas tarda casi 7 veces más (Polars un 85% menos) ya que Pandas realiza más comprobaciones y conversiones de tipos de datos durante la carga, mientras que Polars utiliza un enfoque más optimizado y basado en chunks.
+En las operaciones de Filtrado, Ordenamiento y cálculo de una nueva columna Polars también es mucho más rápido, tardando entre un 85% menos y un 50% menos (o 6 veces más rápido para la primera, y el doble para las otras dos) debido a su optimización para la ejecución en memoria y el paralelismo.
+En Agregación es Polars la que tarda el triple y en cambio de tipo el doble. Es posible que Polars haya tardado más que Pandas debido a la sobrecarga de la creación de nuevas columnas o la conversión de tipos de datos. Pandas puede ser más eficiente en estas tareas para datasets pequeños o medianos. En datasets grandes no debería ser así, Polars debería eventualmente ser más rápido, pero al no ser este un dataset muy grande (unas 22.000 líneas) el resultado es razonable.
+"""
